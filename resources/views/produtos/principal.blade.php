@@ -1,6 +1,15 @@
 @extends('template')
 
 @section('view-template')
+<div class="ui menu">
+  <div class="item">
+    <div class="ui primary button">Sign up</div>
+  </div>
+  <div class="item">
+    <div class="ui button">Log-in</div>
+  </div>
+</div>
+
 <h4 style="text-align: center;"><?php echo $title; ?></h4>
 
 <button id="novo-produto" class="ui yellow button" data-action="{{ route('produto-form') }}" style="margin-left: 25%; color: black">Novo produto</button>
@@ -11,24 +20,24 @@
 <div id="div-form-produtos"></div>
 
 <div id="principal-produtos" class="ui form">
-  <div class="fields">
-    <div class="field">
-      <label>Nome do produto:</label>
-      <input type="text">
-    </div>
-    <div class="field">
-      <label>Tipo do produto:</label>
-        <select class="ui fluid dropdown">
-            <?php foreach ($tipos as $value): ?>
-                <option value="<?php echo $value->id_produto_tipo; ?>"><?php echo $value->no_produto_tipo; ?></option>
-            <?php endforeach; ?>
-        </select>
-    </div>
-    <div class="field">
-    <label for="">&nbsp;&nbsp;</label>
-    <button id="listar-produtos" class="ui red button" data-action="{{ route('produto-listar') }}" style="float: right; right:0;">Listar</button>
-    </div>
-  </div>
+        <div class="fields">
+            <div class="field">
+                <label for="no_produto">Nome do produto:</label>
+                <input type="text" id="no_produto" name="no_produto">
+            </div>
+            <div class="field">
+                <label>Tipo do produto:</label>
+                <select class="ui fluid dropdown" id="id_produto_tipo" name="id_produto_tipo">
+                    <?php foreach ($tipos as $value): ?>
+                        <option value="<?php echo $value->id_produto_tipo; ?>"><?php echo $value->no_produto_tipo; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="field">
+                <label for="">&nbsp;&nbsp;</label>
+                <button id="listar-produtos" class="ui red button" data-action="{{ route('produto-listar') }}" style="float: right; right:0;"><i class="angle double down icon"></i>Listar</button>
+            </div>
+        </div>
 </div>
 
 <div id="grid-produtos"></div>
@@ -71,7 +80,7 @@
 
                 let lista = '';
 
-                    lista = '<table class="ui table">';
+                    lista = '<table class="ui table" style="margin-bottom: 15%;">';
                     lista += '    <thead>';
                     lista += '       <tr>';
                     lista += '            <th>Produto</th>';

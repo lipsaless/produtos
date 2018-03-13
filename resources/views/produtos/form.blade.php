@@ -4,8 +4,8 @@
         <input type="text" name="no_produto" id="no_produto" value="{{ $obj->no_produto }}">
     </div>
     <div class="field">
-        <label for="id_tipo_produto">Tipo do produto:</label>
-        <select class="" id="id_tipo_produto" name="id_tipo_produto">
+        <label for="id_produto_tipo">Tipo do produto:</label>
+        <select class="" id="id_produto_tipo" name="id_produto_tipo">
             <?php foreach ($tipos as $value): ?>
                 <?php $selecionado = ($value->id_produto_tipo == $obj->id_produto_tipo) ? 'selected' : '' ?>
                 <option value="<?php echo $value->id_produto_tipo; ?>" <?php echo $selecionado; ?>><?php echo $value->no_produto_tipo; ?></option>
@@ -13,14 +13,23 @@
         </select>
     </div>
     <div class="field">
-        <label for="nu_preço">Preço do produto:</label>
-        <input type="text" name="nu_preço" id="nu_preço" value="{{ $obj->nu_preco }}">
+        <label for="id_produto_status">Status do produto:</label>
+        <select class="" id="id_produto_status" name="id_produto_status">
+            <?php foreach ($status as $value): ?>
+                <?php $produtoStatus = ($value->id_produto_status == $obj->id_produto_status) ? 'selected' : '' ?>
+                <option value="<?php echo $value->id_produto_status; ?>" <?php echo $produtoStatus; ?>><?php echo $value->no_produto_status; ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+    <div class="field">
+        <label for="nu_preco">Preço do produto:</label>
+        <input type="text" name="nu_preco" id="nu_preco" value="{{ $obj->nu_preco }}">
     </div>
     <div class="field">
         <label for="ds_produto">Descrição do produto:</label>
         <input type="text" name="ds_produto" id="ds_produto" value="{{ $obj->ds_produto }}">
     </div>
-    <button class="ui green button" type="submit">Salvar</button>
+    <button id="salvar-produto" class="ui green button" type="submit"><i class="fas fa-check"></i>Salvar</button>
 </form>
 
 <script>

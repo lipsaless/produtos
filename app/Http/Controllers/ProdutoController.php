@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\Produto;
 use App\Model\ProdutoTipo;
+use App\Model\ProdutoStatus;
 
 class ProdutoController extends Controller
 {
@@ -20,22 +21,20 @@ class ProdutoController extends Controller
 
     public function form()
     {
-        $modelTipo = new ProdutoTipo;
         $model = new Produto;
+        $modelTipo = new ProdutoTipo;
+        $modelStatus = new ProdutoStatus;
+
         $tipos = $modelTipo->buscar();
-        return view('produtos.form', ['tipos' => $tipos, 'obj' => $model]);
+        $status = $modelStatus->buscar();
+
+        return view('produtos.form', ['tipos' => $tipos, 'obj' => $model, 'status' => $status]);
     }
 
     public function gravar(Request $request)
     {
         $model = new Produto($request->all());
-        $inserir = $model->save();
-        
-        if ($inserir) {
-            echo 'inserido com sucesso';
-        } else {
-            echo 'falha ao inserir';
-        }
+        $model->save();
     }
 
     public function listar()
@@ -48,16 +47,20 @@ class ProdutoController extends Controller
     {
         $model = new Produto;
         $modelTipo = new ProdutoTipo;
+        $modelStatus = new ProdutoStatus;
+
         $tipos = $modelTipo->buscar();
+        $status = $modelStatus->buscar();
         $obj = $model->find($id);
-        return view('produtos.form', ['tipos' => $tipos, 'obj' => $obj ]);
+
+        return view('produtos.form', ['tipos' => $tipos, 'obj' => $obj, 'status' => $status]);
     }
 
     public function excluir($id)
     {
         $model = new Produto;
         $obj = $model->find($id);
-       // dd($model);
+        
         $obj->dt_fim = date('Y-m-d H:i:s');
         $obj->update();
 
