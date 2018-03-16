@@ -37,10 +37,11 @@ class ProdutoController extends Controller
         $model->save();
     }
 
-    public function listar()
+    public function listar(Request $request)
     {
         $model = new Produto;
-        return $model->buscar();
+
+        return $model->buscar($request->all());
     }
 
     public function editar($id)

@@ -1,14 +1,6 @@
 @extends('template')
 
 @section('view-template')
-<div class="ui menu">
-  <div class="item">
-    <div class="ui primary button">Sign up</div>
-  </div>
-  <div class="item">
-    <div class="ui button">Log-in</div>
-  </div>
-</div>
 
 <h4 style="text-align: center;"><?php echo $title; ?></h4>
 
@@ -16,30 +8,34 @@
 
 <button id="voltar-produto" class="ui yellow button" style="margin-left: 25%; display:none; color: black;"><i class="arrow left icon"></i>Voltar</button>
 
-
+<!--FORM-->
 <div id="div-form-produtos"></div>
 
+<!--CONSULTAR-->
 <div id="principal-produtos" class="ui form">
-        <div class="fields">
-            <div class="field">
-                <label for="no_produto">Nome do produto:</label>
-                <input type="text" id="no_produto" name="no_produto">
-            </div>
-            <div class="field">
-                <label>Tipo do produto:</label>
-                <select class="ui fluid dropdown" id="id_produto_tipo" name="id_produto_tipo">
-                    <?php foreach ($tipos as $value): ?>
-                        <option value="<?php echo $value->id_produto_tipo; ?>"><?php echo $value->no_produto_tipo; ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-            <div class="field">
-                <label for="">&nbsp;&nbsp;</label>
-                <button id="listar-produtos" class="ui red button" data-action="{{ route('produto-listar') }}" style="float: right; right:0;"><i class="angle double down icon"></i>Listar</button>
-            </div>
+    <form id="form-consultar-produto" action="{{ route('produto-listar')}}" method="GET">
+    <div class="fields">
+        <div class="field">
+            <label for="no_produto">Nome do produto:</label>
+            <input type="text" id="no_produto" name="no_produto">
         </div>
+        <div class="field">
+            <label>Tipo do produto:</label>
+            <select class="ui fluid dropdown" id="id_produto_tipo" name="id_produto_tipo">
+                <?php foreach ($tipos as $value): ?>
+                    <option value="<?php echo $value->id_produto_tipo; ?>"><?php echo $value->no_produto_tipo; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="field">
+            <label for="">&nbsp;&nbsp;</label>
+            <button id="listar-produtos" class="ui red button" data-action="{{ route('produto-listar') }}" style="float: right; right:0;"><i class="angle double down icon"></i>Listar</button>
+        </div>
+    </div>
+    </form>
 </div>
 
+<!--GRID-->
 <div id="grid-produtos"></div>
 
 <script>
@@ -67,14 +63,14 @@
             return false;
         });
 
-        $('#listar-produtos').click(function() {
-
+        $('#listar-produtos').click(function(e) {
+            e.preventDefault();
             let lista = '';
 
             $.ajax({
                 url: $(this).attr("data-action"),
                 type: "GET",
-                data: $(this).serialize(),
+                data: $('#form-consultar-produto').serialize(),
                 dataType: "json"
             }).done(function(grid){
 
@@ -166,7 +162,7 @@
                 });
             });
         });
-        $('#listar-produtos').click();
+        // $('#listar-produtos').click();
 
         
     });

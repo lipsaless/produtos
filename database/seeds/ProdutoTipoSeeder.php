@@ -19,6 +19,10 @@ class ProdutoTipoSeeder extends Seeder
             [   
                 'no_produto_tipo' => 'Alimento',
                 'ref_produto_tipo' => 'alimento'
+            ],
+            [   
+                'no_produto_tipo' => 'Outros',
+                'ref_produto_tipo' => 'outros'
             ]
         ];
 

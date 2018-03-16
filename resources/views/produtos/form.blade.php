@@ -27,9 +27,9 @@
     </div>
     <div class="field">
         <label for="ds_produto">Descrição do produto:</label>
-        <input type="text" name="ds_produto" id="ds_produto" value="{{ $obj->ds_produto }}">
+       <textarea name="" id="" cols="30" rows="10" id="ds_produto" name="ds_produto"></textarea>
     </div>
-    <button id="salvar-produto" class="ui green button" type="submit"><i class="fas fa-check"></i>Salvar</button>
+    <button id="salvar-produto" class="ui green button" type="submit">Salvar</button>
 </form>
 
 <script>
